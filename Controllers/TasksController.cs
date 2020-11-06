@@ -28,6 +28,9 @@ namespace Task_Management_Platform.Controllers
         //GET: afisarea unui singur task
         public ActionResult Show(int id)
         {
+            if (TempData.ContainsKey("message"))
+                ViewBag.Message = TempData["message"];
+
             Task task = db.Tasks.Find(id);
             
             return View(task);
@@ -37,6 +40,9 @@ namespace Task_Management_Platform.Controllers
         //GET: afisare formular adaugare task
         public ActionResult New()
         {
+            if (TempData.ContainsKey("message"))
+                ViewBag.Message = TempData["message"];
+
             return View();
         }
 
@@ -44,9 +50,10 @@ namespace Task_Management_Platform.Controllers
         [HttpPost]
         public ActionResult New(Task newTask)
         {
+            db.Tasks.Add(newTask);
+
             try
             {
-                db.Tasks.Add(newTask);
                 db.SaveChanges();
                 TempData["message"] = "Taskul a fost adaugat cu success!";
                 
@@ -54,7 +61,7 @@ namespace Task_Management_Platform.Controllers
             }
             catch(Exception e)
             {
-                ViewBag.ErrorMessage = e.Message;
+                TempData["message"] = "Nu s-a putut adauga task-ul!";
                 return View(newTask);
             }
         }
@@ -63,6 +70,9 @@ namespace Task_Management_Platform.Controllers
         //GET: afisare formular de editare task
         public ActionResult Edit(int id)
         {
+            if (TempData.ContainsKey("message"))
+                ViewBag.Message = TempData["message"];
+
             Task task = db.Tasks.Find(id);
 
             return View(task);
@@ -82,14 +92,14 @@ namespace Task_Management_Platform.Controllers
                     db.SaveChanges();
                     TempData["message"] = "Task-ul a fost modificat cu succes!";
 
-                    return RedirectToAction("Show/" + id);
+                    return Redirect("Tasks/Show/" + id);
                 }
 
                 return View(editedTask);
             }
             catch(Exception e)
             {
-                ViewBag.ErrorMessage = e.Message;
+                TempData["message"] = "Nu s-a putut edita task-ul!";
                 return View(editedTask);
             }
         }
@@ -99,9 +109,10 @@ namespace Task_Management_Platform.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
+            Task task = db.Tasks.Find(id);
+
             try
             {
-                Task task = db.Tasks.Find(id);
                 db.Tasks.Remove(task);
                 db.SaveChanges();
                 TempData["message"] = "Task-ul a fost sters cu success!";
@@ -109,9 +120,9 @@ namespace Task_Management_Platform.Controllers
                 return RedirectToAction("Index");
             }
             catch (Exception e)
-            {
-                ViewBag.ErrorMessage = e.Message;
-                return View();
+            { 
+                TempData["message"] = "Nu s-a putut sterge task-ul!";
+                return Redirect("Tasks/Show/" + task.TaskId);
             }
         }
     }

@@ -11,7 +11,7 @@ namespace Task_Management_Platform.Controllers
     {
         private Models.AppData db = new Models.AppData();
 
-        //POST: adaugare task-ul nou in baza de date
+        //POST: adaugare cometariu-ul nou in baza de date
         [HttpPost]
         public ActionResult New(Comment newComment)
         {
@@ -25,8 +25,8 @@ namespace Task_Management_Platform.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.ErrorMessage = e.Message;
-                return View(newComment);
+                TempData["message"] = "Nu s-a putut adauga comentariul!";
+                return RedirectToRoute("/Tasks/Show/" + newComment.Task.TaskId, newComment);
             }
         }
 
@@ -34,6 +34,9 @@ namespace Task_Management_Platform.Controllers
         //GET: afisare formular de editare comentariu
         public ActionResult Edit(int id)
         {
+            if (TempData.ContainsKey("message"))
+                ViewBag.Message = TempData["message"];
+
             Comment comment = db.Comments.Find(id);
 
             return View(comment);
@@ -60,7 +63,7 @@ namespace Task_Management_Platform.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.ErrorMessage = e.Message;
+                TempData["message"] = "Task-ul a fost modificat cu succes!";
                 return View(editedComment);
             }
         }
@@ -83,7 +86,7 @@ namespace Task_Management_Platform.Controllers
             catch (Exception e)
             {
                 ViewBag.ErrorMessage = e.Message;
-                TempData["message"] = "A aparut o eroare la stergerea mesajului";
+                TempData["message"] = "A aparut o eroare la stergerea mesajului!";
                 return Redirect("/Tasks/Show/" + comment.Task.TaskId);
             }
         }
