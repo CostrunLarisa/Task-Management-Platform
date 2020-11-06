@@ -12,6 +12,8 @@
 <form method="post" action="/Comments/Edit/@Model.CommentId">
     @Html.HttpMethodOverride(HttpVerbs.Put)
 
+    @Html.Hidden("TaskId")
+
     @Html.Hidden("CommentId")
 
     @Html.Label("Content", "Continut comentariu")

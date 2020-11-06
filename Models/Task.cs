@@ -11,6 +11,7 @@ namespace Task_Management_Platform.Models
         [Key]
         public int TaskId {get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Title { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }

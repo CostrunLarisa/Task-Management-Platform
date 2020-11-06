@@ -11,8 +11,10 @@ namespace Task_Management_Platform.Models
         [Key]
         public int CommentId { get; set; }
         [Required]
+        [DataType(DataType.MultilineText)]
         public string Content { get; set; }
         public DateTime DataAdaug { get; set; }
+        public int TaskId { get; set; }
 
         //foreign key
         //un comntariu este asociat unui task

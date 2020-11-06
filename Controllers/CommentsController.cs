@@ -17,17 +17,20 @@ namespace Task_Management_Platform.Controllers
         [HttpPost]
         public ActionResult New(Comment newComment)
         {
+            newComment.DataAdaug = DateTime.Now;
+
             try
             {
                 db.Comments.Add(newComment);
                 db.SaveChanges();
                 TempData["message"] = "Taskul a fost adaugat cu success!";
 
-                return Redirect("/Tasks/Show/" + newComment.Task.TaskId);
+                return Redirect("/Tasks/Show/" + newComment.TaskId);
             }
             catch (Exception e)
             {
                 ViewBag.Message = "Nu s-a putut adauga comentariul!";
+                ViewBag.Message = e.Message;
                 return View(newComment);
             }
         }
@@ -55,7 +58,7 @@ namespace Task_Management_Platform.Controllers
                     db.SaveChanges();
                     TempData["message"] = "Task-ul a fost modificat cu succes!";
 
-                    return Redirect("/Tasks/Show/" + editedComment.Task.TaskId);
+                    return Redirect("/Tasks/Show/" + comment.TaskId);
                 }
 
                 ViewBag.Message = "Task-ul a fost modificat cu succes!";
@@ -81,7 +84,7 @@ namespace Task_Management_Platform.Controllers
                 db.SaveChanges();
                 TempData["message"] = "Task-ul a fost sters cu success!";
 
-                return Redirect("/Tasks/Show/" + comment.Task.TaskId);
+                return Redirect("/Tasks/Show/" + comment.TaskId);
             }
             catch (Exception e)
             {

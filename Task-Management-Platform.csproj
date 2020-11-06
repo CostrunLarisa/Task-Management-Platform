@@ -133,9 +133,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011061726439_Initial.cs" />
-    <Compile Include="Migrations\202011061726439_Initial.designer.cs">
-      <DependentUpon>202011061726439_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202011062218524_Initial.cs" />
+    <Compile Include="Migrations\202011062218524_Initial.designer.cs">
+      <DependentUpon>202011062218524_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppData.cs" />
@@ -188,11 +188,7 @@
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Show.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011061726439_Initial.resx">
-      <DependentUpon>202011061726439_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="Views\Comments\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -207,7 +203,11 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011062218524_Initial.resx">
+      <DependentUpon>202011062218524_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
