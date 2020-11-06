@@ -34,9 +34,6 @@ namespace Task_Management_Platform.Controllers
         //GET: afisare formular de editare comentariu
         public ActionResult Edit(int id)
         {
-            if (TempData.ContainsKey("message"))
-                ViewBag.Message = TempData["message"];
-
             Comment comment = db.Comments.Find(id);
 
             return View(comment);
@@ -59,11 +56,12 @@ namespace Task_Management_Platform.Controllers
                     return Redirect("/Tasks/Show/" + editedComment.Task.TaskId);
                 }
 
+                ViewBag.Message = "Task-ul a fost modificat cu succes!";
                 return View(editedComment);
             }
             catch (Exception e)
             {
-                TempData["message"] = "Task-ul a fost modificat cu succes!";
+                ViewBag.Message = "Task-ul a fost modificat cu succes!";
                 return View(editedComment);
             }
         }

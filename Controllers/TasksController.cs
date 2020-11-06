@@ -18,7 +18,7 @@ namespace Task_Management_Platform.Controllers
             if (TempData.ContainsKey("message"))
                 ViewBag.Message = TempData["message"];
 
-            var tasks = db.Tasks.Include("Comment");
+            var tasks = db.Tasks;
             ViewBag.Tasks = tasks;
 
             return View();
@@ -39,10 +39,7 @@ namespace Task_Management_Platform.Controllers
         //NEW
         //GET: afisare formular adaugare task
         public ActionResult New()
-        {
-            if (TempData.ContainsKey("message"))
-                ViewBag.Message = TempData["message"];
-
+        { 
             return View();
         }
 
@@ -61,7 +58,7 @@ namespace Task_Management_Platform.Controllers
             }
             catch(Exception e)
             {
-                TempData["message"] = "Nu s-a putut adauga task-ul!";
+                ViewBag.Message = "Nu s-a putut adauga task-ul!";
                 return View(newTask);
             }
         }
@@ -70,9 +67,6 @@ namespace Task_Management_Platform.Controllers
         //GET: afisare formular de editare task
         public ActionResult Edit(int id)
         {
-            if (TempData.ContainsKey("message"))
-                ViewBag.Message = TempData["message"];
-
             Task task = db.Tasks.Find(id);
 
             return View(task);
@@ -92,14 +86,15 @@ namespace Task_Management_Platform.Controllers
                     db.SaveChanges();
                     TempData["message"] = "Task-ul a fost modificat cu succes!";
 
-                    return Redirect("Tasks/Show/" + id);
+                    return Redirect("/Tasks/Show/" + id);
                 }
 
+                ViewBag.Message = "Nu s-a putut edita task-ul!";
                 return View(editedTask);
             }
             catch(Exception e)
             {
-                TempData["message"] = "Nu s-a putut edita task-ul!";
+                ViewBag.Message = "Nu s-a putut edita task-ul!";
                 return View(editedTask);
             }
         }
@@ -122,7 +117,7 @@ namespace Task_Management_Platform.Controllers
             catch (Exception e)
             { 
                 TempData["message"] = "Nu s-a putut sterge task-ul!";
-                return Redirect("Tasks/Show/" + task.TaskId);
+                return Redirect("/Tasks/Show/" + task.TaskId);
             }
         }
     }
