@@ -8,8 +8,9 @@ namespace Task_Management_Platform.Models
 {
     public class Comment
     {
+        [Key]
+        public int CommentId { get; set; }
         [Required]
-        public string CommentId { get; set; }
         public string Content { get; set; }
         public DateTime DataAdaug { get; set; }
 

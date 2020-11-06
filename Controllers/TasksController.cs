@@ -47,10 +47,9 @@ namespace Task_Management_Platform.Controllers
         [HttpPost]
         public ActionResult New(Task newTask)
         {
-            db.Tasks.Add(newTask);
-
             try
             {
+                db.Tasks.Add(newTask);
                 db.SaveChanges();
                 TempData["message"] = "Taskul a fost adaugat cu success!";
                 

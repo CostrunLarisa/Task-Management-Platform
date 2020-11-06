@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,8 +27,8 @@ namespace Task_Management_Platform.Controllers
             }
             catch (Exception e)
             {
-                TempData["message"] = "Nu s-a putut adauga comentariul!";
-                return RedirectToRoute("/Tasks/Show/" + newComment.Task.TaskId, newComment);
+                ViewBag.Message = "Nu s-a putut adauga comentariul!";
+                return View(newComment);
             }
         }
 
