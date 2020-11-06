@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modificare articol</h2>
+
+@model Task_Management_Platform.Models.Task
+
+<form method="post" action="/Tasks/Edit/@Model.TaskId">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.Hidden("Id")
+
+    @Html.Label("Title", "Titlu Task")
+    <br />
+    @Html.EditorFor(m => m.Title)
+    <br />
+    <br />
+
+    @Html.Label("Description", "Descriere task")
+    <br />
+    @Html.Editor("Description")
+    <br />
+
+    @Html.HiddenFor(m => m.Status)
+    <br />
+
+    @Html.Label("DataStart", "Inceput task")
+    <br />
+    @Html.Editor("DataStart");
+    <br />
+    <br />
+
+    @Html.Label("DataFin", "Termen limita task")
+    <br />
+    @Html.Editor("DataFin");
+    <br />
+    <br />
+
+    <button class="btn btn-success" type="submit">Modifica task</button>
+</form>
