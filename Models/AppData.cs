@@ -12,5 +12,7 @@ namespace Task_Management_Platform.Models
             {
                 Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppData, Task_Management_Platform.Migrations.Configuration>("DBConnectionString"));
             }
+
+            
     }
 }
