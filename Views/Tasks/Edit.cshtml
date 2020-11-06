@@ -12,7 +12,7 @@
 <form method="post" action="/Tasks/Edit/@Model.TaskId">
     @Html.HttpMethodOverride(HttpVerbs.Put)
 
-    @Html.Hidden("Id")
+    @Html.Hidden("TaskId")
 
     @Html.Label("Title", "Titlu Task")
     <br />
