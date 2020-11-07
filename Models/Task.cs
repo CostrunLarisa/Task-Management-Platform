@@ -20,7 +20,7 @@ namespace Task_Management_Platform.Models
 
         //foreign key
         //un task apartine unei echipe
-        //public virtual Team Team { get; set; }
+        public virtual Team Team { get; set; }
 
         //un task poate avea unul sau mai multe comentarii
         public virtual ICollection<Comment> Comments { get; set; }
