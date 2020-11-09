@@ -15,5 +15,7 @@ namespace Task_Management_Platform.Models
 
             public DbSet<Task> Tasks { get; set; }
             public DbSet<Comment> Comments { get; set; }
+            public DbSet<Team> Teams { get; set; }
+            public DbSet<Project> Projects { get; set; }
     }
 }
