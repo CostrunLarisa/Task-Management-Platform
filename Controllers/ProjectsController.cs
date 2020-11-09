@@ -12,8 +12,9 @@ namespace Task_Management_Platform.Controllers
     {
         private Models.AppData db = new Models.AppData();
 
-        public ActionResult New()
+        public ActionResult New(int Id)
         {
+            ViewBag.TeamId = Id;
             return View();
         }
 
@@ -52,12 +53,12 @@ namespace Task_Management_Platform.Controllers
             try
             {
                 Project project = db.Projects.Find(id);
-                if (TryUpdateModel(projectNew))
+                if (TryUpdateModel(project))
                 {
                     project = projectNew;
-                    db.Projects.Add(project);
                     db.SaveChanges();
-                    return Redirect("/Teams/Show/" + project.TeamId);
+                    TempData["message"] = "Proiectul a fost editat cu succes!";
+                    return Redirect("/Projects/Show/" + id);
                 }
 
             }
@@ -78,8 +79,9 @@ namespace Task_Management_Platform.Controllers
                 {
                     var team_ID = prj.TeamId;
                     db.Projects.Remove(prj);
-                    TempData["message"] = "Proiectul a fost sters u succes!";
-                    return RedirectToAction("/Teams/Show/"+team_ID);
+                    db.SaveChanges();
+                    TempData["message"] = "Proiectul a fost sters cu succes!";
+                    return Redirect("/Teams/Show/"+team_ID);
                 }
 
             }

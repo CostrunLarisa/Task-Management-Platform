@@ -8,22 +8,27 @@
 
 @model Task_Management_Platform.Models.Project
 
-<form method="post" action="/Projects/New">
+<form method="post" action="/Projects/New/@ViewBag.TeamId">
     @Html.Hidden("TeamId")
-    @Html.Label("Nume")
+    @Html.Label("Nume", "Nume Proiect")
     <br />
-    @Html.TextBox("Nume", null, new { @class = "form-control" });
+    @Html.TextBox("Nume", null, new { @class = "form-control" })
     <br />
     <br />
-    @Html.Label("DataInceput")
+    @Html.Label("Descriere")
     <br />
-    @Html.TextBox("DataInceput", null, new { @class = "form-control" });
+    @Html.TextArea("Descriere", null, new { @class = "form-control" })
+    <br />
+    <br />
+    @Html.Label("DataInceput", "Data Inceput")
+    <br />
+    @Html.TextBox("DataInceput", null, new { @class = "form-control" })
     <br />
     <br />
     @Html.Label("Deadline")
     <br />
-    @Html.TextBox("Deadline", null, new { @class = "form-control" });
+    @Html.TextBox("Deadline", null, new { @class = "form-control" })
     <br />
     <br />
-    <button class="btn btn-sm btn-success" type="submit">Adauga proiect.</button>
+    <button class="btn btn-sm btn-success" type="submit">Adauga proiect</button>
 </form>

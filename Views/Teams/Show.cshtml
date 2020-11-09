@@ -39,14 +39,10 @@
 
         <div class="col-md-8">
             <div>
-                <p>@proj.Nume</p>
+                <p><a href="/Projects/Show/@proj.ProjectId">@proj.Nume</a></p>
                 <br />
 
                 <small class="pull-right">@proj.DataInceput - @proj.Deadline</small>
-            </div>
-            <div>
-                <p>@proj.Descriere</p>
-                <br />
             </div>
             <div style="display: inline-block; float : left; margin-right: 15px">
                 <a class="glyphicon glyphicon-pencil" href="/Projects/Edit/@proj.ProjectId"></a>
@@ -66,5 +62,5 @@
 </div>
 }
 
-<a class="btn btn-success pull-left" href="/Projects/Edit/@Model.ProjectId">Adauga proiect</a>
+<a class="btn btn-success pull-left" href="/Projects/New/@Model.TeamId">Adauga proiect</a>
 <br />
