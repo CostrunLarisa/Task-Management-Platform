@@ -17,6 +17,7 @@ namespace Task_Management_Platform.Controllers
             if (TempData.ContainsKey("message"))
                 ViewBag.Message = TempData["message"];
             var teams = db.Teams;
+            ViewBag.Teams = teams;
             return View();
         }
         public ActionResult Show(int id)
@@ -92,6 +93,7 @@ namespace Task_Management_Platform.Controllers
                 if(TryUpdateModel(team))
                 {
                     db.Teams.Remove(team);
+                    db.SaveChanges();
                     TempData["message"] = "Echipa a fost stearsa cu succes!";
                     return RedirectToAction("Index");
                 }

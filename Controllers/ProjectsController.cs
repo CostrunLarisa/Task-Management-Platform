@@ -63,7 +63,7 @@ namespace Task_Management_Platform.Controllers
             }
             catch(Exception e)
             {
-                ViewBag.message = "Nu s-a putut adauga proiectul.";
+                ViewBag.Message = "Nu s-a putut adauga proiectul.";
                 return View(projectNew);
             }
             return View(projectNew);
