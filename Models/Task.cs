@@ -10,12 +10,20 @@ namespace Task_Management_Platform.Models
     {
         [Key]
         public int TaskId {get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Titlul task-ului este obligatoriu.")]
+        [StringLength(100, ErrorMessage = "Titlul nu poate avea mai mult de 100 de caractre.")]
         [DataType(DataType.MultilineText)]
         public string Title { get; set; }
+
         public string Description { get; set; }
+
         public string Status { get; set; }
+
+        [Required(ErrorMessage = "Data de inceput este obligatorie.")]
         public DateTime DataStart { get; set; }
+
+        [Required(ErrorMessage = "Data de final este obligatorie.")]
         public DateTime DataFin { get; set; }
 
         //foreign key

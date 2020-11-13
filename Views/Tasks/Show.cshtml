@@ -80,6 +80,7 @@
                         @Html.Label("Content", "Continut Comentariu")
                         <br />
                         @Html.TextArea("Content", null, new { @class = "form-control" })
+                        @Html.ValidationMessage("Content", "", new { @class = "ttext-danger" })
                         <br />
 
                         <button class="btn btn-success " type="submit">Adauga comentariu</button>

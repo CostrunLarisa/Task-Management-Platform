@@ -9,18 +9,21 @@
 
 @model Task_Management_Platform.Models.Comment
 
-<form method="post" action="/Comments/Edit/@Model.CommentId">
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Comments"))
+{
     @Html.HttpMethodOverride(HttpVerbs.Put)
 
-    @Html.Hidden("TaskId")
+    @Html.Hidden("CommentsId")
 
-    @Html.Hidden("CommentId")
+    @Html.Hidden("TaskId")
 
     @Html.Label("Content", "Continut comentariu")
     <br />
     @Html.Editor("Content")
     <br />
+    @Html.ValidationMessage("Content", "", new { @class = "text-danger" })
+    <br />
     <br />
 
     <button type="submit">Modifica comentariul</button>
-</form>
+}

@@ -9,10 +9,12 @@
 
 @model Task_Management_Platform.Models.Task
 
-<form method="post" action="/Tasks/New">
+@using (Html.BeginForm(actionName: "New", controllerName: "Tasks"))
+{
     @Html.Label("Title", "Titlu Task")
     <br />
     @Html.TextBox("Title", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
     <br />
     <br />
 
@@ -27,14 +29,16 @@
     @Html.Label("DataStart", "Inceput task")
     <br />
     @Html.TextArea("DataStart", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.DataStart, "", new { @class = "text-danger" })
     <br />
     <br />
 
     @Html.Label("DataFin", "Termen limita task")
     <br />
     @Html.TextArea("DataFin", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.DataFin, "", new { @class = "text-danger" })
     <br />
     <br />
 
     <button class="btn btn-sm btn-success" type="submit">Adauga task</button>
-</form>
+}

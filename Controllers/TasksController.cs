@@ -49,11 +49,16 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
-                db.Tasks.Add(newTask);
-                db.SaveChanges();
-                TempData["message"] = "Taskul a fost adaugat cu success!";
-                
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Tasks.Add(newTask);
+                    db.SaveChanges();
+                    TempData["message"] = "Taskul a fost adaugat cu success!";
+
+                    return RedirectToAction("Index");
+                }
+
+                return View(newTask);
             }
             catch(Exception e)
             {
@@ -77,18 +82,23 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
-                Task task = db.Tasks.Find(id);
-
-                if (TryUpdateModel(task))
+                if (ModelState.IsValid)
                 {
-                    task = editedTask;
-                    db.SaveChanges();
-                    TempData["message"] = "Task-ul a fost modificat cu succes!";
+                    Task task = db.Tasks.Find(id);
 
-                    return Redirect("/Tasks/Show/" + id);
+                    if (TryUpdateModel(task))
+                    {
+                        task = editedTask;
+                        db.SaveChanges();
+                        TempData["message"] = "Task-ul a fost modificat cu succes!";
+
+                        return Redirect("/Tasks/Show/" + id);
+                    }
+
+                    ViewBag.Message = "Nu s-a putut edita task-ul!";
+                    return View(editedTask);
                 }
 
-                ViewBag.Message = "Nu s-a putut edita task-ul!";
                 return View(editedTask);
             }
             catch(Exception e)

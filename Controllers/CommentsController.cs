@@ -21,17 +21,23 @@ namespace Task_Management_Platform.Controllers
 
             try
             {
-                db.Comments.Add(newComment);
-                db.SaveChanges();
-                TempData["message"] = "Taskul a fost adaugat cu success!";
+                if (ModelState.IsValid)
+                {
+                    db.Comments.Add(newComment);
+                    db.SaveChanges();
+                    TempData["message"] = "Taskul a fost adaugat cu success!";
 
+                    return Redirect("/Tasks/Show/" + newComment.TaskId);
+                }
+
+                TempData["message"] = "Nu s-a putut adauga comntariul!";
                 return Redirect("/Tasks/Show/" + newComment.TaskId);
             }
             catch (Exception e)
             {
                 ViewBag.Message = "Nu s-a putut adauga comentariul!";
                 ViewBag.Message = e.Message;
-                return View(newComment);
+                return Redirect("/Tasks/Show/" + newComment.TaskId);
             }
         }
 
@@ -50,18 +56,23 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
-                Comment comment = db.Comments.Find(id);
-
-                if (TryUpdateModel(comment))
+                if (ModelState.IsValid)
                 {
-                    comment = editedComment;
-                    db.SaveChanges();
-                    TempData["message"] = "Task-ul a fost modificat cu succes!";
+                    Comment comment = db.Comments.Find(id);
 
-                    return Redirect("/Tasks/Show/" + comment.TaskId);
+                    if (TryUpdateModel(comment))
+                    {
+                        comment = editedComment;
+                        db.SaveChanges();
+                        TempData["message"] = "Task-ul a fost modificat cu succes!";
+
+                        return Redirect("/Tasks/Show/" + comment.TaskId);
+                    }
+
+                    ViewBag.Message = "Task-ul a fost modificat cu succes!";
+                    return View(editedComment);
                 }
 
-                ViewBag.Message = "Task-ul a fost modificat cu succes!";
                 return View(editedComment);
             }
             catch (Exception e)
