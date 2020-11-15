@@ -39,10 +39,14 @@ namespace Task_Management_Platform.Controllers
             newTeam.DataInscriere = DateTime.Now;
             try
             {
-                db.Teams.Add(newTeam);
-                db.SaveChanges();
-                TempData["message"]= "Echipa a fost adaugata!";
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Teams.Add(newTeam);
+                    db.SaveChanges();
+                    TempData["message"] = "Echipa a fost adaugata!";
+                    return RedirectToAction("Index");
+                }
+                else return View(newTeam);
             }catch(Exception e)
             {
                 ViewBag.Message= "Nu s-a putut adauga echipa.";
@@ -66,14 +70,18 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
-                Team team = db.Teams.Find(id);
-                if (TryUpdateModel(team))
+                if (ModelState.IsValid)
                 {
-                    team = teamReq;
-                    db.SaveChanges();
-                    TempData["message"] = "Echipa a fost editata!";
-                    return Redirect("/Teams/Show/"+id);
+                    Team team = db.Teams.Find(id);
+                    if (TryUpdateModel(team))
+                    {
+                        team = teamReq;
+                        db.SaveChanges();
+                        TempData["message"] = "Echipa a fost editata!";
+                        return Redirect("/Teams/Show/" + id);
+                    }
                 }
+                else return View(teamReq);
 
             }catch(Exception e)
             {

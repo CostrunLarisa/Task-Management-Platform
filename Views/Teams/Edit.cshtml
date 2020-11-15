@@ -9,21 +9,22 @@
 
 @model Task_Management_Platform.Models.Team
 
-<form method="post" action="/Teams/Edit/@Model.TeamId">
-    @Html.HttpMethodOverride(HttpVerbs.Put)
-   
-    @Html.Hidden("TeamId")
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Teams"))
+{@Html.HttpMethodOverride(HttpVerbs.Put)
 
-    @Html.Label("Nume", "Nume Echipa")
-    <br />
-    @Html.Editor("Nume");
-    <br />
-    <br />
-    @Html.Label("DataInscriere", "Data Inscrierii")
-    <br />
-    @Html.Editor("DataInscriere");
-    <br />
-    <br />
+@Html.Hidden("TeamId")
 
-    <button class="btn btn-success" type="submit">Modifica echipa.</button>
-  </form>
+@Html.Label("Nume", "Nume Echipa")
+<br />
+@Html.Editor("Nume");
+@Html.ValidationMessageFor(model => model.Nume, null, new { @class = "text-danger " })
+<br />
+<br />
+@Html.Label("DataInscriere", "Data Inscrierii")
+<br />
+@Html.Editor("DataInscriere");
+<br />
+<br />
+
+<button class="btn btn-success" type="submit">Modifica echipa.</button>
+}

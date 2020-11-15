@@ -10,10 +10,12 @@ namespace Task_Management_Platform.Models
     {
         [Key]
         public int TeamId {get;set;}
+        
+        [Required(ErrorMessage="Numele echipei este obligatoriu")]
         public string Nume { get; set; }
         public DateTime DataInscriere { get; set; }
         public int ProjectId { get; set; }
-        //O echipa poate are mai multi membri
+        //O echipa poate avea mai multi membri
         //public virtual ICollection<Member> Members { get; set; }
         //O echipa poate dezvolta mai multe taskuri
         public virtual ICollection<Task> Tasks { get; set; }

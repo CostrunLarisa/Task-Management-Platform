@@ -23,10 +23,15 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
-                db.Projects.Add(project);
-                TempData["message"] = "Proiectul a fost adaugat cu succes.";
-                db.SaveChanges();
-                return Redirect("/Teams/Show/" + project.TeamId);
+                if (ModelState.IsValid)
+                {
+                    db.Projects.Add(project);
+                    TempData["message"] = "Proiectul a fost adaugat cu succes.";
+                    db.SaveChanges();
+                    return Redirect("/Teams/Show/" + project.TeamId);
+                }
+                else return View(project);
+                
             }catch(Exception e)
             {
                 ViewBag.Message = "Nu s-a putut adauga proiectul.";
@@ -52,14 +57,18 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
-                Project project = db.Projects.Find(id);
-                if (TryUpdateModel(project))
+                if (ModelState.IsValid)
                 {
-                    project = projectNew;
-                    db.SaveChanges();
-                    TempData["message"] = "Proiectul a fost editat cu succes!";
-                    return Redirect("/Projects/Show/" + id);
+                    Project project = db.Projects.Find(id);
+                    if (TryUpdateModel(project))
+                    {
+                        project = projectNew;
+                        db.SaveChanges();
+                        TempData["message"] = "Proiectul a fost editat cu succes!";
+                        return Redirect("/Projects/Show/" + id);
+                    }
                 }
+                else return View(projectNew);
 
             }
             catch(Exception e)
@@ -74,6 +83,7 @@ namespace Task_Management_Platform.Controllers
         {
             try
             {
+
                 Project prj = db.Projects.Find(id);
                 if (TryUpdateModel(prj))
                 {

@@ -150,9 +150,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Database1.mdf" />
-    <Content Include="App_Data\Database1_log.ldf">
-      <DependentUpon>Database1.mdf</DependentUpon>
+    <Content Include="App_Data\Task_Management_Platform.mdf" />
+    <Content Include="App_Data\Task_Management_Platform_log.ldf">
+      <DependentUpon>Task_Management_Platform.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
